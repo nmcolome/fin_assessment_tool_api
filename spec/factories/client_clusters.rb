@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :client_cluster do
-    name "MyString"
+    sequence(:name) { |n| "ClientCluster#{n}" }
   end
 end
