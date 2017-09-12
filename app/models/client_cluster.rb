@@ -1,0 +1,2 @@
+class ClientCluster < ApplicationRecord
+end
