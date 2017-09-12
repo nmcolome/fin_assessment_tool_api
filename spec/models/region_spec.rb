@@ -7,5 +7,7 @@ RSpec.describe Region, type: :model do
 
   describe "relationships" do
     it { should have_many(:clients) }
+    it { should have_many(:region_products) }
+    it { should have_many(:products) }
   end
 end

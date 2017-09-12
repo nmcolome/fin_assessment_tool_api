@@ -7,5 +7,7 @@ RSpec.describe Product, type: :model do
 
   describe "relationships" do
     it { should belong_to(:category) }
+    it { should have_many(:region_products) }
+    it { should have_many(:regions) }
   end
 end
