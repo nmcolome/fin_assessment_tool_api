@@ -10,5 +10,6 @@ RSpec.describe Client, type: :model do
   describe "relationships" do
     it { should belong_to(:client_cluster) }
     it { should belong_to(:region) }
+    it { should have_many(:sales) }
   end
 end

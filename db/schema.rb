@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912044644) do
+ActiveRecord::Schema.define(version: 20170912133803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,9 +60,21 @@ ActiveRecord::Schema.define(version: 20170912044644) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sales", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "region_product_id"
+    t.decimal "sales", precision: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_sales_on_client_id"
+    t.index ["region_product_id"], name: "index_sales_on_region_product_id"
+  end
+
   add_foreign_key "clients", "client_clusters"
   add_foreign_key "clients", "regions"
   add_foreign_key "products", "categories"
   add_foreign_key "region_products", "products"
   add_foreign_key "region_products", "regions"
+  add_foreign_key "sales", "clients"
+  add_foreign_key "sales", "region_products"
 end
