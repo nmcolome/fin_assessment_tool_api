@@ -12,5 +12,6 @@ RSpec.describe Sale, type: :model do
     it { should belong_to(:region_product) }
     it { should have_many(:discounts)}
     it { should have_many(:cost_of_goods_solds)}
+    it { should have_many(:operating_expenses)}
   end
 end
