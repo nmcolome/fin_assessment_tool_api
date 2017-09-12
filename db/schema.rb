@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912210900) do
+ActiveRecord::Schema.define(version: 20170912211750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20170912210900) do
     t.bigint "sale_id"
     t.string "account"
     t.string "description"
-    t.decimal "amount", precision: 2
+    t.decimal "amount", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sale_id"], name: "index_cost_of_goods_solds_on_sale_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20170912210900) do
     t.bigint "sale_id"
     t.string "account"
     t.string "description"
-    t.decimal "amount", precision: 2
+    t.decimal "amount", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sale_id"], name: "index_discounts_on_sale_id"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20170912210900) do
     t.bigint "sale_id"
     t.string "account"
     t.string "description"
-    t.decimal "amount", precision: 2
+    t.decimal "amount", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sale_id"], name: "index_operating_expenses_on_sale_id"
