@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :sale do
-    client nil
-    region_product nil
-    sales 1
+    client
+    region_product
+    amount 1234.56
   end
 end
