@@ -10,5 +10,6 @@ RSpec.describe Sale, type: :model do
   describe "associations" do
     it { should belong_to(:client) }
     it { should belong_to(:region_product) }
+    it { should have_many(:discounts)}
   end
 end

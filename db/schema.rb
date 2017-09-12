@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912133803) do
+ActiveRecord::Schema.define(version: 20170912150106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(version: 20170912133803) do
     t.datetime "updated_at", null: false
     t.index ["client_cluster_id"], name: "index_clients_on_client_cluster_id"
     t.index ["region_id"], name: "index_clients_on_region_id"
+  end
+
+  create_table "discounts", force: :cascade do |t|
+    t.bigint "sale_id"
+    t.string "account"
+    t.string "description"
+    t.decimal "amount", precision: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sale_id"], name: "index_discounts_on_sale_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -72,6 +82,7 @@ ActiveRecord::Schema.define(version: 20170912133803) do
 
   add_foreign_key "clients", "client_clusters"
   add_foreign_key "clients", "regions"
+  add_foreign_key "discounts", "sales"
   add_foreign_key "products", "categories"
   add_foreign_key "region_products", "products"
   add_foreign_key "region_products", "regions"
