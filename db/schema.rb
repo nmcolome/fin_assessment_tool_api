@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912211750) do
+ActiveRecord::Schema.define(version: 20170914171538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170912211750) do
     t.decimal "amount", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "transaction_date", null: false
     t.index ["sale_id"], name: "index_cost_of_goods_solds_on_sale_id"
   end
 
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 20170912211750) do
     t.decimal "amount", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "transaction_date", null: false
     t.index ["sale_id"], name: "index_discounts_on_sale_id"
   end
 
@@ -64,6 +66,7 @@ ActiveRecord::Schema.define(version: 20170912211750) do
     t.decimal "amount", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "transaction_date", null: false
     t.index ["sale_id"], name: "index_operating_expenses_on_sale_id"
   end
 
@@ -96,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170912211750) do
     t.decimal "amount", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "transaction_date", null: false
     t.index ["client_id"], name: "index_sales_on_client_id"
     t.index ["region_product_id"], name: "index_sales_on_region_product_id"
   end
