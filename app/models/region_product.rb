@@ -1,5 +1,5 @@
 class RegionProduct < ApplicationRecord
   belongs_to :region
   belongs_to :product
-  has_many :sales
+  has_many :sales, dependent: :destroy
 end
