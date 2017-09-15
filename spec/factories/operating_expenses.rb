@@ -3,6 +3,7 @@ FactoryGirl.define do
     sale
     account "0123456789"
     description "Administrative"
-    amount 1234.56
+    amount 80.56
+    transaction_date "2017/09/14"
   end
 end
