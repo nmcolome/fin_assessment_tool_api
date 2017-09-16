@@ -6,10 +6,10 @@ class ProfitAndLossSerializer < ActiveModel::Serializer
   end
 
   def gross_profit
-    object.sales + object.discount + object.cogs
+    self.net_sales + object.cogs
   end
 
   def net_profit
-    object.sales + object.discount + object.cogs + object.op_expense
+    self.gross_profit + object.op_expense
   end
 end
