@@ -39,8 +39,8 @@ class Sale < ApplicationRecord
         ON discounts.sale_id = sales.id
         WHERE EXTRACT(year FROM sales.transaction_date) = 2017
         GROUP BY 3,4,5,6
-        ), 
-        ytd_2016 AS (
+      ), 
+      ytd_2016 AS (
         SELECT SUM(sales.amount) AS sales_16, SUM(discounts.amount) AS discounts_16, client_clusters.name AS clusters, products.name AS products, regions.name AS regions, categories.name AS categories
         FROM sales
         JOIN clients
@@ -59,10 +59,10 @@ class Sale < ApplicationRecord
         ON discounts.sale_id = sales.id
         WHERE EXTRACT(month FROM sales.transaction_date) BETWEEN 01 AND #{month} AND EXTRACT(year FROM sales.transaction_date) = 2016
         GROUP BY 3,4,5,6
-        )
-        SELECT sales_16, discounts_16, ytd_2017.*
-        FROM ytd_2017
-        JOIN ytd_2016 ON ytd_2017.clusters = ytd_2016.clusters AND ytd_2017.products = ytd_2016.products AND ytd_2017.regions = ytd_2016.regions;"
+      )
+      SELECT sales_16, discounts_16, ytd_2017.*
+      FROM ytd_2017
+      JOIN ytd_2016 ON ytd_2017.clusters = ytd_2016.clusters AND ytd_2017.products = ytd_2016.products AND ytd_2017.regions = ytd_2016.regions;"
     ]
   end
 
