@@ -18,12 +18,18 @@ RSpec.describe "ProfitAndLoss API" do
       expect(first_month_data).to have_key("date")
       expect(first_month_data).to have_key("sales")
       expect(first_month_data).to have_key("discount")
-      expect(first_month_data).to have_key("op_expense")
+      expect(first_month_data).to have_key("net_sales")
       expect(first_month_data).to have_key("cogs")
+      expect(first_month_data).to have_key("gross_profit")
+      expect(first_month_data).to have_key("op_expense")
+      expect(first_month_data).to have_key("net_profit")
       expect(first_month_data["sales"].to_f).to eq(1234.56)
       expect(first_month_data["discount"].to_f).to eq(100.67)
       expect(first_month_data["op_expense"].to_f).to eq(80.56)
       expect(first_month_data["cogs"].to_f).to eq(234.56)
+      expect(first_month_data["net_sales"].to_f).to eq(1335.23)
+      expect(first_month_data["gross_profit"].to_f).to eq(1569.79)
+      expect(first_month_data["net_profit"].to_f).to eq(1650.35)
     end
   end
 end
