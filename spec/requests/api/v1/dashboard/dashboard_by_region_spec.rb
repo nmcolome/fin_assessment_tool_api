@@ -15,7 +15,7 @@ RSpec.describe 'Dashboard API' do
       prev_discounts = create(:discount, sale_id: prev_sales.id, transaction_date: "2016/09/14", amount: 189.53)
       prev_discounts2 = create(:discount, sale_id: prev_sales2.id, transaction_date: "2016/09/14", amount: 302.53)
 
-      get "/api/v1/dashboard"
+      get "/api/v1/dashboard?region=region1"
 
       expect(response).to be_success
 
@@ -29,9 +29,9 @@ RSpec.describe 'Dashboard API' do
       expect(row).to have_key("segment_contribution")
       expect(row).to have_key("net_sales_prev_year")
       expect(row).to have_key("discounts_17")
-      expect(row["clusters"]).to eq("ClientCluster2")
-      expect(row["products"]).to eq("Product2")
-      expect(row["categories"]).to eq("Category2")
+      expect(row["clusters"]).to eq("ClientCluster1")
+      expect(row["products"]).to eq("Product1")
+      expect(row["categories"]).to eq("Category1")
       expect(row["net_sales_curr_year"].to_f).to eq(3871.77)
       expect(row["segment_contribution"].to_f).to eq(1.0)
       expect(row["net_sales_prev_year"].to_f).to eq(4447.8)

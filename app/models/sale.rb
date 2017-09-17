@@ -19,7 +19,7 @@ class Sale < ApplicationRecord
 
   def self.get_dashboard
     month = get_latest_month
-    result = Sale.find_by_sql [
+    Sale.find_by_sql [
       "WITH ytd_2017 AS (
         SELECT SUM(sales.amount) AS sales_17, SUM(discounts.amount) AS discounts_17, client_clusters.name AS clusters, products.name AS products, categories.name AS categories
         FROM sales
@@ -74,5 +74,54 @@ class Sale < ApplicationRecord
       WHERE EXTRACT(year FROM sales.transaction_date) = 2017;"
     ]
     result[0].net_sales
+  end
+
+  def self.get_dashboard_by_region(region)
+    month = get_latest_month
+    Sale.find_by_sql [
+      "WITH ytd_2017 AS (
+        SELECT SUM(sales.amount) AS sales_17, SUM(discounts.amount) AS discounts_17, client_clusters.name AS clusters, products.name AS products, categories.name AS categories
+        FROM sales
+        JOIN clients
+        ON sales.client_id = clients.id
+        JOIN client_clusters
+        ON clients.client_cluster_id = client_clusters.id
+        JOIN region_products
+        ON sales.region_product_id = region_products.id
+        JOIN regions
+        ON regions.id = region_products.region_id
+        JOIN products
+        ON region_products.product_id = products.id
+        JOIN categories
+        ON products.category_id = categories.id
+        JOIN discounts
+        ON discounts.sale_id = sales.id
+        WHERE EXTRACT(year FROM sales.transaction_date) = 2017 AND regions.name='#{region}'
+        GROUP BY 3,5,4
+        ), 
+        ytd_2016 AS (
+        SELECT SUM(sales.amount) AS sales_16, SUM(discounts.amount) AS discounts_16, client_clusters.name AS clusters, products.name AS products, categories.name AS categories
+        FROM sales
+        JOIN clients
+        ON sales.client_id = clients.id
+        JOIN client_clusters
+        ON clients.client_cluster_id = client_clusters.id
+        JOIN region_products
+        ON sales.region_product_id = region_products.id
+        JOIN regions
+        ON regions.id = region_products.region_id
+        JOIN products
+        ON region_products.product_id = products.id
+        JOIN categories
+        ON products.category_id = categories.id
+        JOIN discounts
+        ON discounts.sale_id = sales.id
+        WHERE EXTRACT(month FROM sales.transaction_date) BETWEEN 01 AND #{month} AND EXTRACT(year FROM sales.transaction_date) = 2016 AND regions.name='#{region}'
+        GROUP BY 3,5,4
+        )
+        SELECT sales_16, discounts_16, ytd_2017.*
+        FROM ytd_2017
+        JOIN ytd_2016 ON ytd_2017.clusters = ytd_2016.clusters AND ytd_2017.products = ytd_2016.products;"
+    ]
   end
 end
