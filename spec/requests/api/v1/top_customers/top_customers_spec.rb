@@ -21,6 +21,21 @@ RSpec.describe 'TopCustomers API' do
 
       raw_data = JSON.parse(response.body)
       row = raw_data[0]
+
+      expect(row).to have_key("client")
+      expect(row).to have_key("sales_16")
+      expect(row).to have_key("discounts_16")
+      expect(row).to have_key("net_sales_16")
+      expect(row).to have_key("sales_17")
+      expect(row).to have_key("discounts_17")
+      expect(row).to have_key("net_sales_17")
+      expect(row["client"]).to eq("Client4")
+      expect(row["sales_16"].to_f).to eq(3955.74)
+      expect(row["discounts_16"].to_f).to eq(492.06)
+      expect(row["net_sales_16"].to_f).to eq(4447.8)
+      expect(row["sales_17"].to_f).to eq(3670.43)
+      expect(row["discounts_17"].to_f).to eq(201.34)
+      expect(row["net_sales_17"].to_f).to eq(3871.77)
     end
   end
 end
