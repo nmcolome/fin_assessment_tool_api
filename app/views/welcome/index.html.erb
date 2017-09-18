@@ -1,0 +1,29 @@
+<h1>Welcome to the Finanacial Assessment Tool API</h1>
+<h3>The following endpoints are available. All endpoints will return the data response as JSON.</h3>
+
+<h3>Profit And Loss Statement</h3>
+<li><code>GET /api/v1/profit_and_loss</code> - returns the total (global) profit and loss statement per month</li>
+<p>It returns an array of objects, each object has: date, sales, discounts, net_sales, cogs, gross profit, operating expenses, net profit. Al indicators in US Dollars and rounded to 2 decimal places except for date which is a date data type.</p>
+
+<h5>Terms</h5>
+<li>Sales: gross sales based on price list</li>
+<li>Discounts: either on or off invoice. </li>
+<li>Net Sales = Sales - Discounts</li>
+<li>Cogs: cost of goods sold. Any expense related to manufacturing, packaging and distributing a product.</li>
+<li>Gross Profit = Net Sales - Cogs</li>
+<li>Operating Expenses: Advertising, promotional expenses, administrative, travel, overheads and taxes. Any other expense related to the business but not directly link to the sales exercise or to the manufacturing process.</li>
+<li>Net Profit = Gross Profit - Operating Expenses</li>
+
+<h3>Dashboard</h3>
+<li><code>GET /api/v1/dashboard</code> - returns the main indicators of contribution and growth by Client Cluster, Category and Product.</li>
+<p>It returns an array of objects, each object has: client cluster name, product name, product category name, current year net sales (2017), previous year net sales (2016), segment contribution and current year discounts (2017). Al indicators in US Dollars and rounded to 2 decimal places except for segment contribution which is a percentage.</p>
+<li><code>GET /api/v1/dashboard?region=x</code> - It returns the sames information as <code>GET /api/v1/dashboard?region=x</code>  filtered by a specific region.</li>
+<h5>Terms</h5>
+<li>Net Sales = Gross Sales - Discounts</li>
+<li>Segment Contribution = Net Sales of a Cluster-Product-Category / Total (global)Net Sales. It represents how much that Cluster-Product-Category contributes to the total Net Sales of the company.</li>
+
+<h3>Top Customers</h3>
+<li><code>GET /api/v1/top_customers</code> - returns top 10 customers based on global net sales.</li>
+<p>It returns an array of objects, each object has: client name, previous year sales (2016), previous year discounts (2016), previous year net sales (2016), current year sales (2017), current year discounts (2017), current year net sales (2017) in US Dollars and rounded to 2 decimal places.</p>
+<h5>Terms</h5>
+<li>Net Sales = Gross Sales - Discounts</li>
