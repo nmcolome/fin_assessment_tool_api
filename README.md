@@ -60,3 +60,6 @@ It returns an array of objects, each object has: client name, previous year sale
 
 ## Stack
 Rails 5.1.4 and Ruby 2.4.1
+
+## Author
+[Natalia Colomé](https://github.com/nmcolome)
